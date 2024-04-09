@@ -1,0 +1,63 @@
+<!--    Author: Muhfat Alam
+        Date: 04/08/2024
+        Description: Check your IP is in the same subnet not not
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IP Subnet Checker</title>
+</head>
+<link rel="stylesheet" href="styles.css">
+<body>
+  <h1>IP Subnet Checker</h1>
+  <div>
+    <label for="ipAddress">Enter IP address:</label>
+    <input type="text" id="ipAddress" placeholder="e.g., 192.168.0.1">
+  </div>
+  <div>
+    <label for="subnet">Enter subnet with CIDR notation:</label>
+    <input type="text" id="subnet" placeholder="e.g., 192.168.0.0/24">
+  </div>
+  <button onclick="checkSubnet()">Check Subnet</button>
+  <div id="result"></div>
+
+  <script>
+    function checkSubnet() {
+      var ipAddress = document.getElementById('ipAddress').value;
+      var subnet = document.getElementById('subnet').value;
+      
+      var result = checkIP(ipAddress, subnet);
+      
+      var resultElement = document.getElementById('result');
+      resultElement.textContent = result ? "IP is in the subnet range" : "IP is not in the subnet range";
+    }
+
+    function checkIP(ip, subnet) {
+      var subnetParts = subnet.split('/');
+      if (subnetParts.length !== 2) {
+        console.error("Invalid subnet format");
+        return false;
+      }
+
+      var subnetAddress = subnetParts[0];
+      var subnetMask = parseInt(subnetParts[1]);
+
+      var ipParts = ip.split('.');
+      var ipBinary = ipParts.map(function(part) {
+        return ("00000000" + parseInt(part).toString(2)).slice(-8);
+      }).join('');
+
+      var subnetMaskBinary = "1".repeat(subnetMask) + "0".repeat(32 - subnetMask);
+      var subnetAddressBinary = subnetAddress.split('.').map(function(part) {
+        return ("00000000" + parseInt(part).toString(2)).slice(-8);
+      }).join('');
+
+      return ipBinary.substr(0, subnetMask) === subnetAddressBinary.substr(0, subnetMask);
+    }
+  </script>
+</body>
+</html>
