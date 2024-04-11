@@ -20,6 +20,31 @@ vector<string> split(const string &s, char delim) {
   return tokens;
 }
 
+/* Test Purposes
+int main() {
+  string input;
+  char delimiter;
+
+  // Get input string and delimiter from the user
+  cout << "Enter a string: ";
+  getline(cin, input);
+
+  cout << "Enter a delimiter character: ";
+  cin >> delimiter;
+
+  // Call the split function
+  vector<string> tokens = split(input, delimiter);
+
+  // Print the tokens
+  cout << "Tokens:" << endl;
+  for (const auto &token : tokens) {
+    cout << token << endl;
+  }
+
+  return 0;
+}
+
+*/
 
 // Function to check if IP in the same subnet
 bool checkIP(const string &ip, const string &subnet) {
@@ -124,6 +149,10 @@ int main() {
     } else {
       cout << "\n\nIP is not in the subnet range" << endl;
     }
+  }
+    
+  else (response == 2) {
+    cout << "It is still under process" < endl;
   }
   return 0;
 }
