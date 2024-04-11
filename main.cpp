@@ -8,6 +8,8 @@
 #include <vector>
 using namespace std;
 
+
+// splits the input string into substrings based on the delimiter and returns a vector containing these substrings
 vector<string> split(const string &s, char delim) {
   vector<string> tokens;
   string token;
@@ -17,6 +19,7 @@ vector<string> split(const string &s, char delim) {
   }
   return tokens;
 }
+
 
 // Function to check if IP in the same subnet
 bool checkIP(const string &ip, const string &subnet) {
